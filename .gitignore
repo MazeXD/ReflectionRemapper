@@ -1,0 +1,11 @@
+build
+bin
+downloads
+.settings
+
+.classpath
+.project
+MANIFEST.MF
+
+*.prefs
+*.class

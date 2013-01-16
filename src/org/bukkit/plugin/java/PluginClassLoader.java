@@ -16,7 +16,6 @@ import mcpc.plus.transformers.PluginTransformer;
  * A ClassLoader for plugins, to allow shared classes across multiple plugins
  */
 public class PluginClassLoader extends URLClassLoader {
-    private String nbtTest = "cd";
     private final JavaPluginLoader loader;
     private final Map<String, Class<?>> classes = new HashMap<String, Class<?>>();
 
@@ -48,17 +47,17 @@ public class PluginClassLoader extends URLClassLoader {
             }
 
             if (result == null) {
-            	// MCPC+ start
-				try{
-					byte[] classBytes = PluginTransformer.transformClass(name, this);
-					
-					result = defineClass(name, classBytes, 0, classBytes.length);
-				}
-				catch(ClassNotFoundException e)
-				{
-					result = super.findClass(name);
-				}
-				// MCPC+ end
+                // MCPC+ start
+                try{
+                    byte[] classBytes = PluginTransformer.transformClass(name, this);
+
+	            result = defineClass(name, classBytes, 0, classBytes.length);
+                }
+                catch(ClassNotFoundException e)
+                {
+                    result = super.findClass(name);
+                }
+                // MCPC+ end
 				
                 if (result != null) {
                     loader.setClass(name, result);
